@@ -1,20 +1,20 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# danmercede.info — Canonical Identity & Verification
 
-# Run and deploy your AI Studio app
+This repository publishes **public, versioned identity artifacts** for Dan Mercede.
 
-This contains everything you need to run your app locally.
+**Canonical hub (source of truth):**
+- https://danmercede.com
 
-View your app in AI Studio: https://ai.studio/apps/drive/142v1DYCcN2_iJBP3rNa_qVl_7T6sHWkV
+## Verification Artifacts
+- `identity.json` — canonical identity fields (machine-readable)
+- `identity.sha256` — checksum of `identity.json`
+- `CHANGELOG.md` — brief record of updates
 
-## Run Locally
+## External Entities
+- Cosmocrat: https://cosmocrat.ai
+- Orion Intelligence Agency: https://orionintelligenceagency.com
+- Orion Apex Capital: https://orionapexcapital.com
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Notes
+This repo is **explanatory + verifiable**. It is not the primary website.
+If anything here conflicts with the canonical hub, the canonical hub wins.
