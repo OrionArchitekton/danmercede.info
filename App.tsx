@@ -194,15 +194,7 @@ const App: React.FC = () => {
             <p>{fullName}</p>
             <p>Jurisdiction: {location}</p>
           </div>
-          <div className="mt-4 sm:mt-0 flex flex-col sm:items-end gap-1">
-            <a
-              href="https://danmercede.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-black transition-colors"
-            >
-              Context: danmercede.com
-            </a>
+          <div className="mt-4 sm:mt-0">
             <p>&copy; {new Date().getFullYear()} All Rights Reserved.</p>
             <p>CHK: {checksum}</p>
           </div>
