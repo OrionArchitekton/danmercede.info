@@ -1,57 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#ffffff" />
-    <meta name="robots" content="index, follow" />
-    <title>Dan Mercede — Identity Verification</title>
-    <meta name="description" content="Identity verification and structured data for Dan Mercede. Systems Architect and Technology Executive." />
-    
-    <!-- Fonts: Inter for UI, JetBrains Mono for Data/Checksum feel -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              mono: ['JetBrains Mono', 'monospace'],
-            },
-            colors: {
-              neutral: {
-                50: '#f9fafb',
-                100: '#f3f4f6',
-                900: '#111827',
-              }
-            }
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="robots" content="index, follow" />
+  <title>Dan Mercede — Identity Verification</title>
+  <meta name="description"
+    content="Identity verification and structured data for Dan Mercede. Systems Architect and Technology Executive." />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="/favicon.ico">
+
+  <!-- Fonts: Inter for UI, JetBrains Mono for Data/Checksum feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
           },
+          colors: {
+            neutral: {
+              50: '#f9fafb',
+              100: '#f3f4f6',
+              900: '#111827',
+            }
+          }
         },
+      },
+    }
+  </script>
+  <style>
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    @media print {
+      @page {
+        size: letter;
+        margin: 0.75in;
       }
-    </script>
-    <style>
+
       body {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        background: white !important;
+        color: black !important;
       }
-      
-      @media print {
-        @page { size: letter; margin: 0.75in; }
-        body { background: white !important; color: black !important; }
-        a { text-decoration: none !important; color: black !important; }
-        .no-print { display: none !important; }
-        /* Ensure layout is clean for print */
-        main { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
-        section { break-inside: avoid; }
-        h1, h2, h3 { break-after: avoid; }
-        footer { border-top: 1px solid #ccc !important; }
+
+      a {
+        text-decoration: none !important;
+        color: black !important;
       }
-    </style>
+
+      .no-print {
+        display: none !important;
+      }
+
+      /* Ensure layout is clean for print */
+      main {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+      }
+
+      section {
+        break-inside: avoid;
+      }
+
+      h1,
+      h2,
+      h3 {
+        break-after: avoid;
+      }
+
+      footer {
+        border-top: 1px solid #ccc !important;
+      }
+    }
+  </style>
   <script type="importmap">
 {
   "imports": {
@@ -62,8 +102,10 @@
 }
 </script>
 </head>
-  <body class="bg-white text-neutral-900 antialiased">
-    <div id="root"></div>
-      <script type="module" src="/index.tsx"></script>
-  </body>
+
+<body class="bg-white text-neutral-900 antialiased">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>
