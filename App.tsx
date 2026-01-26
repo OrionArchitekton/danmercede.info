@@ -44,11 +44,11 @@ const App: React.FC = () => {
       <SchemaMarkup data={PROFILE_DATA} />
 
       <main className="max-w-3xl mx-auto px-6 py-12 md:py-20 relative">
-        
+
         {/* Print Affordance */}
         <div className="absolute top-6 right-6 no-print">
-          <button 
-            onClick={() => window.print()} 
+          <button
+            onClick={() => window.print()}
             className="text-[10px] uppercase tracking-wider font-mono text-neutral-400 hover:text-neutral-900 transition-colors border border-neutral-200 rounded px-2 py-1 hover:border-neutral-900"
           >
             Print / PDF
@@ -56,17 +56,27 @@ const App: React.FC = () => {
         </div>
 
         {/* 1. Header (Minimal) */}
-        <header className="mb-12">
-          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900 mb-2">
-            {fullName}
-          </h1>
-          <p className="text-lg text-neutral-600 font-light mb-1 print:text-black">
-            {descriptor}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-xs font-mono text-neutral-400 mt-4 print:text-neutral-600">
-            <span>LOC: {location}</span>
-            <span>UPD: {lastUpdated}</span>
-            <span>VER: {version}</span>
+        <header className="mb-12 flex flex-col sm:flex-row justify-between items-start gap-4">
+          <div className="flex-1">
+            <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-neutral-900 mb-2">
+              {fullName}
+            </h1>
+            <p className="text-lg text-neutral-600 font-light mb-1 print:text-black">
+              {descriptor}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-xs font-mono text-neutral-400 mt-4 print:text-neutral-600">
+              <span>LOC: {location}</span>
+              <span>UPD: {lastUpdated}</span>
+              <span>VER: {version}</span>
+            </div>
+          </div>
+
+          <div className="shrink-0 pt-1 sm:pt-0">
+            <img
+              src="https://storage.googleapis.com/cosmocrat/cosmocrat_logos_graphics/executive/dan-mercede-executive-authority.webp"
+              alt="Dan Mercede"
+              className="w-20 h-20 rounded-full border border-neutral-200 object-cover shadow-sm print:hidden"
+            />
           </div>
         </header>
 
@@ -89,7 +99,7 @@ const App: React.FC = () => {
             {links.map((link) => (
               <li key={link.url} className="flex flex-col sm:flex-row sm:justify-between">
                 <span className="text-neutral-500 w-48 print:text-neutral-600">{link.label}</span>
-                <a 
+                <a
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -147,7 +157,7 @@ const App: React.FC = () => {
                   {item.company}
                 </div>
                 {item.role !== "Various Operational Roles" && (
-                   <div className="text-xs text-neutral-500 print:text-neutral-600">
+                  <div className="text-xs text-neutral-500 print:text-neutral-600">
                     {item.role}
                   </div>
                 )}
@@ -161,11 +171,11 @@ const App: React.FC = () => {
           <SectionTitle title="06 // Education" />
           {education.map((edu, idx) => (
             <div key={idx} className="flex flex-col sm:flex-row sm:justify-between mb-2">
-               <div>
-                  <div className="text-neutral-900 text-sm font-medium print:text-black">{edu.institution}</div>
-                  <div className="text-neutral-600 text-xs print:text-neutral-700">{edu.degree}, {edu.field}</div>
-               </div>
-               {edu.year && <div className="font-mono text-xs text-neutral-400 print:text-neutral-600">{edu.year}</div>}
+              <div>
+                <div className="text-neutral-900 text-sm font-medium print:text-black">{edu.institution}</div>
+                <div className="text-neutral-600 text-xs print:text-neutral-700">{edu.degree}, {edu.field}</div>
+              </div>
+              {edu.year && <div className="font-mono text-xs text-neutral-400 print:text-neutral-600">{edu.year}</div>}
             </div>
           ))}
         </section>

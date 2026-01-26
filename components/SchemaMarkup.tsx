@@ -16,7 +16,7 @@ export const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ data }) => {
         "url": "https://danmercede.com/",
         "jobTitle": [data.summary.primaryRole, "Systems Architect"],
         "description": data.descriptor,
-        "image": "https://danmercede.com/avatar.jpg", // Assumes existence or helpful placeholder
+        "image": "https://storage.googleapis.com/cosmocrat/cosmocrat_logos_graphics/executive/dan-mercede-executive-authority.webp",
         "sameAs": data.links.map(link => link.url),
         "worksFor": { "@id": "https://orionapexcapital.com/#org" },
         "affiliation": [
