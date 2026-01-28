@@ -10,67 +10,18 @@ export const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ data }) => {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Person",
-        "@id": "https://www.danmercede.com/#danmercede",
-        "name": data.fullName,
-        "url": "https://www.danmercede.com/",
-        "jobTitle": [data.summary.primaryRole, "Systems Architect"],
-        "description": data.descriptor,
-        "image": "https://storage.googleapis.com/cosmocrat/cosmocrat_logos_graphics/executive/dan-mercede-executive-authority.webp",
-        "sameAs": data.links.map(link => link.url),
-        "worksFor": { "@id": "https://orionapexcapital.com/#org" },
-        "affiliation": [
-          { "@id": "https://cosmocrat.ai/#org" },
-          { "@id": "https://orionintelligenceagency.com/#org" }
-        ],
-        "knowsAbout": [
-          "AI orchestration",
-          "AI governance",
-          "Enterprise AI reliability",
-          "Algorithmic trading systems",
-          "Automation"
-        ],
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": data.education[0].institution
-        }
-      },
-      {
-        "@type": "Organization",
-        "@id": "https://orionapexcapital.com/#org",
-        "name": "Orion Apex Capital",
-        "url": "https://orionapexcapital.com/",
-        "founder": { "@id": "https://danmercede.com/#danmercede" }
-      },
-      {
-        "@type": "Organization",
-        "@id": "https://cosmocrat.ai/#org",
-        "name": "Cosmocrat",
-        "url": "https://cosmocrat.ai/",
-        "parentOrganization": { "@id": "https://orionapexcapital.com/#org" }
-      },
-      {
-        "@type": "Organization",
-        "@id": "https://orionintelligenceagency.com/#org",
-        "name": "Orion Intelligence Agency",
-        "url": "https://orionintelligenceagency.com/",
-        "parentOrganization": { "@id": "https://orionapexcapital.com/#org" }
-      },
-      {
         "@type": "WebPage",
-        "@id": "https://danmercede.info/#webpage",
-        "url": "https://danmercede.info/",
+        "@id": "https://www.danmercede.info/#webpage",
+        "url": "https://www.danmercede.info/",
         "name": `${data.fullName} — Identity Verification`,
-        "datePublished": "2025-01-01",
-        "dateModified": new Date(data.lastUpdated).toISOString(),
-        "isPartOf": { "@id": "https://danmercede.info/#website" },
-        "about": { "@id": "https://danmercede.com/#danmercede" }
+        "about": { "@id": "https://www.danmercede.com/#person" },
+        "isPartOf": { "@id": "https://www.danmercede.info/#website" }
       },
       {
         "@type": "WebSite",
-        "@id": "https://danmercede.info/#website",
-        "url": "https://danmercede.info/",
-        "name": "Dan Mercede Identity Verification"
+        "@id": "https://www.danmercede.info/#website",
+        "url": "https://www.danmercede.info/",
+        "publisher": { "@id": "https://www.danmercede.com/#person" }
       }
     ]
   };
