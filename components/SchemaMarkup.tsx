@@ -11,9 +11,9 @@ export const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ data }) => {
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://danmercede.com/#danmercede",
+        "@id": "https://www.danmercede.com/#danmercede",
         "name": data.fullName,
-        "url": "https://danmercede.com/",
+        "url": "https://www.danmercede.com/",
         "jobTitle": [data.summary.primaryRole, "Systems Architect"],
         "description": data.descriptor,
         "image": "https://storage.googleapis.com/cosmocrat/cosmocrat_logos_graphics/executive/dan-mercede-executive-authority.webp",
