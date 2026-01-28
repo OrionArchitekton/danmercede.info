@@ -73,7 +73,7 @@ const App: React.FC = () => {
 
           <div className="shrink-0 pt-1 sm:pt-0">
             <img
-              src="https://storage.googleapis.com/cosmocrat/cosmocrat_logos_graphics/executive/dan-mercede-executive-authority.webp"
+              src="/dan-mercede-executive-authority.webp"
               alt="Dan Mercede"
               className="w-20 h-20 rounded-full border border-neutral-200 object-cover shadow-sm print:hidden"
             />
