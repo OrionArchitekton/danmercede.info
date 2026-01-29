@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { PROFILE_DATA } from './constants';
+import { PROFILE_DATA, getImageMeta } from './constants';
 import { SchemaMarkup } from './components/SchemaMarkup';
 import { generateIdentityChecksum } from './utils';
+
 
 const SectionTitle: React.FC<{ title: string }> = ({ title }) => (
   <h2 className="text-xs uppercase tracking-widest text-neutral-500 font-mono mb-4 mt-8 border-b border-neutral-200 pb-2 print:border-neutral-400 print:text-neutral-600">
@@ -73,8 +74,8 @@ const App: React.FC = () => {
 
           <div className="shrink-0 pt-1 sm:pt-0">
             <img
-              src="/dan-mercede-executive-authority.webp"
-              alt="Dan Mercede"
+              src="/dan-mercede-executive-authority.png"
+              alt={getImageMeta("/dan-mercede-executive-authority.png").alt}
               className="w-20 h-20 rounded-full border border-neutral-200 object-cover shadow-sm print:hidden"
             />
           </div>
