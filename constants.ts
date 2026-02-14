@@ -7,7 +7,7 @@ const VERSION = "v2025.05.21";
 
 export const PROFILE_DATA: IdentityProfile = {
   fullName: "Dan Mercede",
-  descriptor: "Systems Architect & Technology Executive",
+  descriptor: "Runtime Governance Architect & Technology Executive",
   location: "California, USA",
   lastUpdated: LAST_UPDATED,
   version: VERSION,
@@ -32,15 +32,15 @@ export const PROFILE_DATA: IdentityProfile = {
       end: "Present"
     },
     {
-      role: "Director, Applied AI & Orchestration",
+      role: "Director, Runtime Enforcement & AI Reliability",
       company: "Orion Intelligence Agency",
       start: "2025",
       end: "Present"
     }
   ],
   platforms: [
-    { name: "Cosmocrat", description: "Governed AI Operating System" },
-    { name: "Orion Intelligence Agency", description: "Enterprise AI reliability engineering" },
+    { name: "Cosmocrat", description: "Governed AI Operating System — runtime enforcement, audit receipts, execution control plane" },
+    { name: "Orion Intelligence Agency", description: "Enterprise AI reliability engineering — runtime governance implementation" },
     { name: "ReplyBy", description: "Communication automation product" },
     { name: "Apex Trading Systems", description: "Internal execution system" },
     { name: "Path of Life Hub", description: "Consumer signal platform" }

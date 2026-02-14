@@ -190,14 +190,29 @@ const App: React.FC = () => {
         </section>
 
         {/* 9. Footer (Legal Minimal) */}
-        <footer className="mt-20 pt-8 border-t border-neutral-100 flex flex-col sm:flex-row justify-between text-xs text-neutral-400 font-mono print:border-neutral-400 print:text-black">
-          <div>
-            <p>{fullName}</p>
-            <p>Jurisdiction: {location}</p>
+        <footer className="mt-20 pt-8 border-t border-neutral-100 flex flex-col gap-4 text-xs text-neutral-400 font-mono print:border-neutral-400 print:text-black">
+          <div className="flex flex-col items-center gap-1 print:hidden">
+            <a
+              href="https://www.orionintelligenceagency.com/book"
+              target="_blank"
+              rel="noreferrer"
+              className="text-neutral-700 font-medium hover:text-black hover:underline underline-offset-4 transition-colors"
+            >
+              Book a Runtime Governance Readiness Scan &rarr;
+            </a>
+            <span className="text-neutral-400 text-[10px] tracking-wide">
+              Gap map &bull; Failure heatmap &bull; Enforcement checklist &bull; 30/60/90 plan
+            </span>
           </div>
-          <div className="mt-4 sm:mt-0">
-            <p>&copy; {new Date().getFullYear()} All Rights Reserved.</p>
-            <p>CHK: {checksum}</p>
+          <div className="flex flex-col sm:flex-row justify-between">
+            <div>
+              <p>{fullName}</p>
+              <p>Jurisdiction: {location}</p>
+            </div>
+            <div className="mt-4 sm:mt-0">
+              <p>&copy; {new Date().getFullYear()} All Rights Reserved.</p>
+              <p>CHK: {checksum}</p>
+            </div>
           </div>
         </footer>
 
