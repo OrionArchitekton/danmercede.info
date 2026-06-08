@@ -31,7 +31,7 @@ hub, the hub wins.
 - Web Crypto `SubtleCrypto` for the client-side SHA-256 checksum
 - Hosted on Vercel
 
-Note: `index.html` also loads React from an esm.sh importmap in addition to the npm
+Note: `index.html` also loads React using an import map from esm.sh in addition to the npm
 dependencies.
 
 ## Local development
