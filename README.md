@@ -55,8 +55,7 @@ All identity content is hardcoded in `constants.ts`:
   disambiguation.
 - `IMAGE_METADATA` — `alt` / `description` for each headshot in `public/`.
 - `LAST_UPDATED` and `VERSION` (`constants.ts:5-6`) — bump these manually when content
-  changes. The checksum is derived from a subset of the profile (including `version` and
-  `lastUpdated`), so it only changes when those fields change.
+  changes. The checksum is derived from a canonical subset of the profile, so it changes whenever any of those included fields (including `version` and `lastUpdated`) are updated.
 
 ## Deploy
 
