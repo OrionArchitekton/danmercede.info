@@ -1,20 +1,104 @@
-# danmercede.info — Canonical Identity & Verification
+# danmercede.info
 
-This repository publishes **public, versioned identity artifacts** for Dan Mercede.
+Personal identity and SEO site for Dan Mercede, presenting a verifiable, structured professional profile.
 
-**Canonical hub (source of truth):**
-- https://danmercede.com
+**Live:** https://www.danmercede.info/ · **Canonical hub:** https://danmercede.com
 
-## Verification Artifacts
-- `identity.json` — canonical identity fields (machine-readable)
-- `identity.sha256` — checksum of `identity.json`
-- `CHANGELOG.md` — brief record of updates
+## What this is
 
-## External Entities
-- Cosmocrat: https://cosmocrat.ai
-- Orion Intelligence Agency: https://orionintelligenceagency.com
-- Orion Apex Capital: https://orionapexcapital.com
+A single-page React app that renders one "identity verification" profile for Dan Mercede:
+name, descriptor, canonical links, current positions, platform associations, career
+timeline, education, and a disambiguation notice. All content is driven by a static data
+object (`PROFILE_DATA` in `constants.ts`).
+
+The page computes a SHA-256 checksum of a canonical subset of the profile in the browser
+(`utils.ts`, Web Crypto) and shows the first 10 hex characters in the footer as `CHK:`.
+It also emits schema.org JSON-LD (`WebSite` / `WebPage`) whose `about` and `publisher`
+point at `https://www.danmercede.com/#person`.
+
+This is a live, self-canonical website — a thin SEO spoke that backlinks to the
+danmercede.com hub. The hub is the source of truth: if anything here conflicts with the
+hub, the hub wins.
+
+## Stack
+
+- React 19 + React DOM 19
+- Vite 6, TypeScript 5.8
+- `@vitejs/plugin-react`
+- Tailwind CSS via CDN (`cdn.tailwindcss.com`), configured inline in `index.html`
+- Inter + JetBrains Mono from Google Fonts
+- schema.org JSON-LD for structured data
+- Web Crypto `SubtleCrypto` for the client-side SHA-256 checksum
+- Hosted on Vercel
+
+Note: `index.html` also loads React from an esm.sh importmap in addition to the npm
+dependencies.
+
+## Local development
+
+```bash
+npm install
+npm run dev      # Vite dev server on http://localhost:3000 (host 0.0.0.0)
+npm run build    # production build to dist/
+npm run preview  # serve the production build locally
+```
+
+There is no `.env` to configure. `vite.config.ts` contains a leftover `GEMINI_API_KEY`
+define block from an AI Studio template; nothing in the source reads it, no key is
+committed, and the site runs without it.
+
+## Editing the profile
+
+All identity content is hardcoded in `constants.ts`:
+
+- `PROFILE_DATA` — name, descriptor, links, positions, platforms, timeline, education,
+  disambiguation.
+- `IMAGE_METADATA` — `alt` / `description` for each headshot in `public/`.
+- `LAST_UPDATED` and `VERSION` (`constants.ts:5-6`) — bump these manually when content
+  changes. The checksum is derived from a subset of the profile (including `version` and
+  `lastUpdated`), so it only changes when those fields change.
+
+## Deploy
+
+Deployed on Vercel. `vercel.json` defines:
+
+- An SPA rewrite of `/(.*)` to `/index.html`.
+- `Content-Type: application/xml` and `Cache-Control: public, max-age=3600` headers for
+  `/sitemap.xml`.
+
+The site is SEO-tuned: `public/robots.txt` (allow `/`, disallow `/admin`, `/api`,
+`/preview`, `/draft`, `/_next/`, `/static/`), `public/sitemap.xml`, favicons,
+`apple-touch-icon`, `site.webmanifest`, and Open Graph / Twitter meta in `index.html`.
+The page also offers a Print / PDF action (`window.print`) with print-specific `@media`
+CSS in `index.html`.
+
+## External entities
+
+URLs the profile and app actually reference:
+
+- danmercede.com — https://danmercede.com (canonical hub)
+- LinkedIn — https://www.linkedin.com/in/danmercede
+- GitHub — https://github.com/OrionArchitekton
+- Orion Apex Capital — https://orionapexcapital.com
+- Cosmocrat — https://cosmocrat.ai
+- Orion Intelligence Agency — https://www.orionintelligenceagency.com/book (footer CTA)
+
+## Project structure
+
+| Path | What it holds |
+|------|---------------|
+| `index.html` | HTML shell, Tailwind CDN config, importmap, fonts, SEO meta, print CSS |
+| `index.tsx` | React root (`createRoot` + `StrictMode`) |
+| `App.tsx` | The single-page UI |
+| `constants.ts` | `PROFILE_DATA` identity content + image metadata |
+| `utils.ts` | Client-side SHA-256 checksum |
+| `components/SchemaMarkup.tsx` | schema.org JSON-LD emitter |
+| `types.ts` | `IdentityProfile` type |
+| `vite.config.ts` | Build / dev config |
+| `vercel.json` | Deploy routing + headers |
+| `public/` | robots.txt, sitemap.xml, favicons, webmanifest, headshot images |
 
 ## Notes
-This repo is **explanatory + verifiable**. It is not the primary website.
-If anything here conflicts with the canonical hub, the canonical hub wins.
+
+This repo is private (`package.json` version `0.0.0`) and has no `LICENSE` file, no CI
+workflows, no test suite, and no lint config.
