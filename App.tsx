@@ -50,7 +50,7 @@ const App: React.FC = () => {
         <div className="absolute top-6 right-6 no-print">
           <button
             onClick={() => window.print()}
-            className="text-[10px] uppercase tracking-wider font-mono text-neutral-400 hover:text-neutral-900 transition-colors border border-neutral-200 rounded px-2 py-1 hover:border-neutral-900"
+            className="text-[10px] uppercase tracking-wider font-mono text-neutral-500 hover:text-neutral-900 transition-colors border border-neutral-200 rounded px-2 py-1 hover:border-neutral-900"
           >
             Print / PDF
           </button>
@@ -65,7 +65,7 @@ const App: React.FC = () => {
             <p className="text-lg text-neutral-600 font-light mb-1 print:text-black">
               {descriptor}
             </p>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-xs font-mono text-neutral-400 mt-4 print:text-neutral-600">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-xs font-mono text-neutral-500 mt-4 print:text-neutral-600">
               <span>LOC: {location}</span>
               <span>UPD: {lastUpdated}</span>
               <span>VER: {version}</span>
@@ -74,8 +74,10 @@ const App: React.FC = () => {
 
           <div className="shrink-0 pt-1 sm:pt-0">
             <img
-              src="/dan-mercede-executive-authority.png"
-              alt={getImageMeta("/dan-mercede-executive-authority.png").alt}
+              src="/dan-mercede-executive-authority-avatar.webp"
+              alt={getImageMeta("/dan-mercede-executive-authority-avatar.webp").alt}
+              width={80}
+              height={80}
               className="w-20 h-20 rounded-full border border-neutral-200 object-cover shadow-sm print:hidden"
             />
           </div>
@@ -107,6 +109,7 @@ const App: React.FC = () => {
                   className="text-neutral-900 underline decoration-1 decoration-neutral-300 hover:decoration-neutral-900 transition-all underline-offset-4 print:no-underline print:text-black"
                 >
                   {link.url.replace(/^https?:\/\//, '')}
+                  <span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </li>
             ))}
@@ -123,7 +126,7 @@ const App: React.FC = () => {
                   <div className="text-neutral-900 font-semibold text-sm print:text-black">{pos.role}</div>
                   <div className="text-neutral-600 text-sm print:text-neutral-700">{pos.company}</div>
                 </div>
-                <div className="font-mono text-xs text-neutral-400 mt-1 sm:mt-0 print:text-neutral-600">
+                <div className="font-mono text-xs text-neutral-500 mt-1 sm:mt-0 print:text-neutral-600">
                   {pos.start} — {pos.end}
                 </div>
               </div>
@@ -151,7 +154,7 @@ const App: React.FC = () => {
             {timeline.map((item, idx) => (
               <div key={idx} className="pl-6 relative">
                 <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 bg-neutral-100 border border-neutral-300 rounded-full print:bg-white print:border-black"></div>
-                <div className="font-mono text-xs text-neutral-400 mb-0.5 print:text-neutral-600">
+                <div className="font-mono text-xs text-neutral-500 mb-0.5 print:text-neutral-600">
                   {item.start} – {item.end}
                 </div>
                 <div className="text-sm text-neutral-900 font-medium print:text-black">
@@ -176,7 +179,7 @@ const App: React.FC = () => {
                 <div className="text-neutral-900 text-sm font-medium print:text-black">{edu.institution}</div>
                 <div className="text-neutral-600 text-xs print:text-neutral-700">{edu.degree}, {edu.field}</div>
               </div>
-              {edu.year && <div className="font-mono text-xs text-neutral-400 print:text-neutral-600">{edu.year}</div>}
+              {edu.year && <div className="font-mono text-xs text-neutral-500 print:text-neutral-600">{edu.year}</div>}
             </div>
           ))}
         </section>
@@ -190,17 +193,17 @@ const App: React.FC = () => {
         </section>
 
         {/* 9. Footer (Legal Minimal) */}
-        <footer className="mt-20 pt-8 border-t border-neutral-100 flex flex-col gap-4 text-xs text-neutral-400 font-mono print:border-neutral-400 print:text-black">
+        <footer className="mt-20 pt-8 border-t border-neutral-100 flex flex-col gap-4 text-xs text-neutral-500 font-mono print:border-neutral-400 print:text-black">
           <div className="flex flex-col items-center gap-1 print:hidden">
             <a
               href="https://www.orionintelligenceagency.com/book"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="text-neutral-700 font-medium hover:text-black hover:underline underline-offset-4 transition-colors"
             >
-              Book a Runtime Governance Readiness Scan &rarr;
+              Book a Runtime Governance Readiness Scan <span aria-hidden="true">&rarr;</span><span className="sr-only"> (opens in a new tab)</span>
             </a>
-            <span className="text-neutral-400 text-[10px] tracking-wide">
+            <span className="text-neutral-500 text-[10px] tracking-wide">
               Gap map &bull; Failure heatmap &bull; Enforcement checklist &bull; 30/60/90 plan
             </span>
           </div>
