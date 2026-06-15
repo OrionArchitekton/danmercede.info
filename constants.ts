@@ -87,9 +87,9 @@ export type ImageMeta = { alt: string; description?: string };
 export const IMAGE_METADATA = {
   // Executive / Authority Set
   "dan-mercede-executive-authority-avatar.webp": {
-    alt: "Dan Mercede, Founder & Systems Architect of a governed AI operating system",
+    alt: "Dan Mercede, Founder & Runtime Governance Architect of a governed AI operating system",
     description:
-      "Executive portrait of Dan Mercede, founder and systems architect focused on governed AI systems and enterprise control planes.",
+      "Executive portrait of Dan Mercede, founder and runtime governance architect focused on governed AI systems and enterprise control planes.",
   },
   "dan-mercede-executive-outdoor.png": {
     alt: "Dan Mercede, Founder & Systems Architect of a governed AI operating system",
