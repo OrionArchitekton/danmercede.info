@@ -2,17 +2,17 @@ import { IdentityProfile } from './types';
 
 // Static date ensures the checksum remains deterministic.
 // Update this manually when content changes.
-const LAST_UPDATED = "2025-05-21";
-const VERSION = "v2025.05.21";
+const LAST_UPDATED = "2026-06-15";
+const VERSION = "v2026.06.15";
 
 export const PROFILE_DATA: IdentityProfile = {
   fullName: "Dan Mercede",
-  descriptor: "Runtime Governance Architect & Technology Executive",
+  descriptor: "Founder & AI Systems Architect, Technology Executive",
   location: "California, USA",
   lastUpdated: LAST_UPDATED,
   version: VERSION,
   summary: {
-    primaryRole: "Founder & Systems Architect (Governed AI Operating Systems)",
+    primaryRole: "Founder & AI Systems Architect (Governed AI Operating Systems)",
     primaryOrg: "Orion Apex Capital",
     industry: "Applied Artificial Intelligence / FinTech",
     yearsActive: "2015–Present"
