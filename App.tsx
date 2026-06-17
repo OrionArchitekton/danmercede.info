@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { PROFILE_DATA, getImageMeta } from './constants';
-import { SchemaMarkup } from './components/SchemaMarkup';
 import { generateIdentityChecksum } from './utils';
 
 
@@ -41,9 +40,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white text-neutral-900 selection:bg-neutral-900 selection:text-white">
-      {/* JSON-LD Structured Data */}
-      <SchemaMarkup data={PROFILE_DATA} />
-
       <main className="max-w-3xl mx-auto px-6 py-12 md:py-20 relative">
 
         {/* Print Affordance */}
