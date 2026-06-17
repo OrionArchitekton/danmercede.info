@@ -123,9 +123,11 @@ export function bodyBake(): Plugin {
       order: 'post',
       handler(html: string) {
         const baked = renderBakedBody(PROFILE_DATA);
+        // Use a replacer function so any `$` in `baked` (dynamic profile data)
+        // is treated literally, not as a `$&`/`$1`/etc. replacement pattern.
         const replaced = html.replace(
           /<div id="root">\s*<\/div>/,
-          `<div id="root">${baked}</div>`,
+          () => `<div id="root">${baked}</div>`,
         );
         if (replaced === html) {
           // Fail loud at build time if the root anchor ever changes shape.
