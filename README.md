@@ -29,10 +29,10 @@ hub, the hub wins.
 - Inter + JetBrains Mono from Google Fonts
 - schema.org JSON-LD for structured data
 - Web Crypto `SubtleCrypto` for the client-side SHA-256 checksum
+- Build-time body-bake: a Vite plugin (`vite-plugin-bodybake.ts`) injects a static,
+  crawlable identity profile into `#root` at build time so non-JS answer-engine crawlers
+  see real `<body>` content; React replaces it on mount for human visitors (no SSR runtime)
 - Hosted on Vercel
-
-Note: `index.html` also loads React using an import map from esm.sh in addition to the npm
-dependencies.
 
 ## Local development
 
@@ -86,12 +86,12 @@ URLs the profile and app actually reference:
 
 | Path | What it holds |
 |------|---------------|
-| `index.html` | HTML shell, Tailwind CDN config, importmap, fonts, SEO meta, print CSS |
+| `index.html` | HTML shell, Tailwind CDN config, fonts, SEO meta, print CSS |
 | `index.tsx` | React root (`createRoot` + `StrictMode`) |
 | `App.tsx` | The single-page UI |
 | `constants.ts` | `PROFILE_DATA` identity content + image metadata |
 | `utils.ts` | Client-side SHA-256 checksum |
-| `components/SchemaMarkup.tsx` | schema.org JSON-LD emitter |
+| `vite-plugin-bodybake.ts` | Build-time crawlable-body injector (no-SSR prerender into `#root`) |
 | `types.ts` | `IdentityProfile` type |
 | `vite.config.ts` | Build / dev config |
 | `vercel.json` | Deploy routing + headers |
