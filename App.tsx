@@ -40,7 +40,14 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white text-neutral-900 selection:bg-neutral-900 selection:text-white">
-      <main className="max-w-3xl mx-auto px-6 py-12 md:py-20 relative">
+      {/* Skip link: visually hidden until keyboard-focused, then jumps to main content (W15 a11y). */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 focus:rounded focus:bg-neutral-900 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white focus:no-underline"
+      >
+        Skip to main content
+      </a>
+      <main id="main-content" tabIndex={-1} className="max-w-3xl mx-auto px-6 py-12 md:py-20 relative">
 
         {/* Print Affordance */}
         <div className="absolute top-6 right-6 no-print">

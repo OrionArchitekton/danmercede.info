@@ -23,7 +23,8 @@ danmercede.com hub — not the primary website.
 
 Owns:
 
-- the danmercede.info page UI (`App.tsx`, `components/SchemaMarkup.tsx`)
+- the danmercede.info page UI (`App.tsx`)
+- the structured-data (schema.org JSON-LD) emitted inline in `index.html`
 - identity profile content and image metadata (`constants.ts`), including
   manual `LAST_UPDATED` / `VERSION` bumps and the client-side checksum
   (`utils.ts`)
