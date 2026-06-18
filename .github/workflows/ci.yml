@@ -1,0 +1,57 @@
+name: CI
+
+# Round-2 R8/R9: first CI for this thin identity spoke.
+# Builds the Vite app and asserts the BUILT (served) index.html carries a
+# non-empty crawler body — the static, no-JS payload baked into #root by
+# vite-plugin-bodybake at build time. Guards the empty-body regression class
+# (R9: assert the BUILT/served DOM, not the emitter string).
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-bake-assert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # No committed lockfile on these thin spokes: install (not ci) and never
+      # stage a generated package-lock.json.
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test
+        run: npm test --if-present
+
+      - name: Build
+        run: npm run build
+
+      - name: Bake-output assertion (built index.html crawler body non-empty)
+        run: |
+          set -euo pipefail
+          OUT="dist/index.html"
+          if [ ! -f "$OUT" ]; then
+            echo "FAIL: built $OUT not found after build" >&2
+            exit 1
+          fi
+          # Count opening <h1 / <p tags in the BUILT, served index.html — this is
+          # the DOM crawlers receive (baked into #root), not the emitter string.
+          H1=$(grep -o '<h1[ >]' "$OUT" | wc -l | tr -d ' ')
+          P=$(grep -o '<p[ >]' "$OUT" | wc -l | tr -d ' ')
+          echo "built $OUT: <h1>=$H1 <p>=$P"
+          if [ "$H1" -lt 1 ] || [ "$P" -lt 1 ]; then
+            echo "FAIL: built crawler body is empty (h1=$H1, p=$P) — refusing empty no-JS DOM" >&2
+            exit 1
+          fi
+          echo "PASS: built crawler body non-empty (h1=$H1, p=$P)"
