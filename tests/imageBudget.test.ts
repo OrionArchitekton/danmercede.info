@@ -5,7 +5,7 @@
 // Run via `npm test` (tsx --test).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readdirSync, statSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -44,4 +44,17 @@ test('every public/ image is within its per-type byte budget', () => {
     }
   }
   assert.equal(offenders.length, 0, `image budget exceeded:\n  ${offenders.join('\n  ')}`);
+});
+
+test('Open Graph card references the committed local JPEG asset', () => {
+  const html = readFileSync(path.resolve(PUBLIC_DIR, '..', 'index.html'), 'utf8');
+  const image = html.match(/<meta property="og:image" content="https:\/\/www\.danmercede\.info\/([^"]+)" \/>/);
+  assert.ok(image, 'og:image must reference the danmercede.info host');
+  assert.equal(image[1], 'dan-mercede-og-card.jpg');
+
+  const size = statSync(path.join(PUBLIC_DIR, image[1])).size;
+  assert.ok(size > 0, 'OG card must be non-empty');
+  assert.ok(size <= BUDGETS['.jpg'], `OG card must stay <= 250KB (got ${(size / 1024).toFixed(0)}KB)`);
+  assert.match(html, /<meta property="og:image:width" content="1200" \/>/);
+  assert.match(html, /<meta property="og:image:height" content="630" \/>/);
 });
