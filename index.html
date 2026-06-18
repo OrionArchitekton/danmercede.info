@@ -18,6 +18,9 @@
   <meta property="og:description"
     content="Identity verification and structured data for Dan Mercede. Founder &amp; AI Systems Architect, Technology Executive." />
   <meta property="og:url" content="https://www.danmercede.info/" />
+  <!-- Shares the canonical "Dan Mercede" OG card with danielmercede.info by design
+       (both are .info identity spokes for the same person); a distinct per-spoke
+       card is deferred pending a new asset. -->
   <meta property="og:image" content="https://www.danmercede.info/dan-mercede-og-card.jpg" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
@@ -70,87 +73,9 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet">
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            neutral: {
-              50: '#f9fafb',
-              100: '#f3f4f6',
-              900: '#111827',
-            }
-          }
-        },
-      },
-    }
-  </script>
-  <style>
-    body {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-
-      *,
-      ::before,
-      ::after {
-        transition-duration: 0s !important;
-        transition-delay: 0s !important;
-        animation-duration: 0s !important;
-        animation-delay: 0s !important;
-      }
-    }
-
-    @media print {
-      @page {
-        size: letter;
-        margin: 0.75in;
-      }
-
-      body {
-        background: white !important;
-        color: black !important;
-      }
-
-      a {
-        text-decoration: none !important;
-        color: black !important;
-      }
-
-      .no-print {
-        display: none !important;
-      }
-
-      /* Ensure layout is clean for print */
-      main {
-        padding: 0 !important;
-        margin: 0 !important;
-        max-width: 100% !important;
-      }
-
-      section {
-        break-inside: avoid;
-      }
-
-      h1,
-      h2,
-      h3 {
-        break-after: avoid;
-      }
-
-      footer {
-        border-top: 1px solid #ccc !important;
-      }
-    }
-  </style>
+  <!-- Tailwind is bundled at build time (compiled stylesheet emitted by Vite);
+       the render-blocking Tailwind CDN JIT compiler, the inline `tailwind.config`,
+       and the base/print <style> have moved to tailwind.config.js + index.css. -->
 </head>
 
 <body class="bg-white text-neutral-900 antialiased">

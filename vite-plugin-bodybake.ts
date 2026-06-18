@@ -28,7 +28,9 @@ function escapeHtml(value: string): string {
     .replace(/'/g, '&#39;');
 }
 
-function renderBakedBody(data: IdentityProfile): string {
+// Exported so tests/bodyBake.test.ts can assert render parity (the baked
+// crawler body vs PROFILE_DATA / App.tsx) without invoking the build.
+export function renderBakedBody(data: IdentityProfile): string {
   const {
     fullName,
     descriptor,
@@ -37,6 +39,7 @@ function renderBakedBody(data: IdentityProfile): string {
     links,
     currentPositions,
     platforms,
+    timeline,
     education,
     disambiguation,
   } = data;
@@ -59,6 +62,19 @@ function renderBakedBody(data: IdentityProfile): string {
     )
     .join('');
 
+  // Career timeline, mirroring App.tsx (company + date range; role appended
+  // unless the catch-all "Various Operational Roles" bucket). Previously omitted
+  // from the bake, so the crawler/no-JS body diverged from the live app.
+  const timelineList = timeline
+    .map((item) => {
+      const roleSuffix =
+        item.role !== 'Various Operational Roles' ? ` — ${escapeHtml(item.role)}` : '';
+      return `<li>${escapeHtml(item.company)} (${escapeHtml(item.start)}–${escapeHtml(
+        item.end,
+      )})${roleSuffix}</li>`;
+    })
+    .join('');
+
   const platformsList = platforms
     .map(
       (plat) =>
@@ -77,8 +93,16 @@ function renderBakedBody(data: IdentityProfile): string {
     )
     .join('');
 
-  // Self-contained, answer-first identity passage for raw-HTML crawlers.
+  // yearsActive is a "2015–Present" range; "since 2015–Present" is ungrammatical,
+  // so the prose uses just the start year ("since 2015").
+  const activeSince = escapeHtml(summary.yearsActive.split(/[–—-]/)[0].trim());
+
+  // Self-contained, answer-first identity passage for raw-HTML crawlers, wrapped
+  // in the same <main id="main-content"> landmark + skip link the live app
+  // provides (no-JS / pre-hydration a11y parity).
   return [
+    `<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 focus:rounded focus:bg-neutral-900 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white focus:no-underline">Skip to main content</a>`,
+    `<main id="main-content" tabindex="-1">`,
     `<header>`,
     `<h1>${escapeHtml(fullName)}</h1>`,
     `<p>${escapeHtml(descriptor)}</p>`,
@@ -87,9 +111,9 @@ function renderBakedBody(data: IdentityProfile): string {
     `<h2>Identity Summary</h2>`,
     `<p>${escapeHtml(fullName)} is a ${escapeHtml(summary.primaryRole)} at ${escapeHtml(
       summary.primaryOrg,
-    )}, working in ${escapeHtml(summary.industry)} since ${escapeHtml(
-      summary.yearsActive,
-    )}. Based in ${escapeHtml(location)}.</p>`,
+    )}, working in ${escapeHtml(summary.industry)} since ${activeSince}. Based in ${escapeHtml(
+      location,
+    )}.</p>`,
     `</section>`,
     `<section>`,
     `<h2>Canonical Links</h2>`,
@@ -104,6 +128,10 @@ function renderBakedBody(data: IdentityProfile): string {
     `<ul>${platformsList}</ul>`,
     `</section>`,
     `<section>`,
+    `<h2>Career Timeline</h2>`,
+    `<ul>${timelineList}</ul>`,
+    `</section>`,
+    `<section>`,
     `<h2>Education</h2>`,
     `<ul>${educationList}</ul>`,
     `</section>`,
@@ -111,6 +139,7 @@ function renderBakedBody(data: IdentityProfile): string {
     `<h2>Disambiguation</h2>`,
     `<p>${escapeHtml(disambiguation)}</p>`,
     `</section>`,
+    `</main>`,
   ].join('');
 }
 
@@ -123,6 +152,13 @@ export function bodyBake(): Plugin {
       order: 'post',
       handler(html: string) {
         const baked = renderBakedBody(PROFILE_DATA);
+        // Fail loud (spec AC1) if the rendered body is empty/headingless — prefer
+        // a hard build failure over silently shipping a blank crawler body.
+        if (!/<h1[ >]/.test(baked) || !/<p[ >]/.test(baked)) {
+          throw new Error(
+            'body-bake: rendered body is missing an <h1> or <p> — refusing to emit empty crawler content',
+          );
+        }
         // Use a replacer function so any `$` in `baked` (dynamic profile data)
         // is treated literally, not as a `$&`/`$1`/etc. replacement pattern.
         const replaced = html.replace(
