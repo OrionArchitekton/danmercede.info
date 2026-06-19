@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "tsx --test tests/bodyBake.test.ts tests/imageBudget.test.ts tests/identityGuard.test.ts"
+    "test": "tsx --test tests/bodyBake.test.ts tests/imageBudget.test.ts tests/identityGuard.test.ts tests/contentBoundary.test.ts"
   },
   "dependencies": {
     "react": "^19.2.3",
