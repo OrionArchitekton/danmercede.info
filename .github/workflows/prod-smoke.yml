@@ -1,0 +1,69 @@
+name: Prod Smoke
+
+# Round-2 R5: post-deploy synthetic smoke against the SERVED production page.
+#
+# Catches the "empty body survives CI because CI tests the BUILD not the SERVED
+# output" class: ci.yml asserts the built dist/index.html crawler body is
+# non-empty, but a broken deploy, a Vercel rewrite regression, or a CDN/origin
+# fault can still serve an empty or JS-only body to raw-HTML crawlers in prod.
+# This job fetches the LIVE https://danmercede.info HTML (creds-free curl) and
+# asserts the crawler-critical surface survived: >=1 <h1, >=1 <p, and >=1
+# JSON-LD block (the structured-data backlink raw-HTML answer engines read).
+#
+# Mirrors ci.yml's grep idiom (count <h1 / <p on the served HTML) and adds the
+# JSON-LD assertion. Pure curl + grep — no secrets.
+
+on:
+  schedule:
+    # Unique minute for this repo to avoid GitHub Actions cron contention with
+    # the sibling brand spokes' smoke jobs.
+    - cron: '23 13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prod-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch served production HTML and assert crawler body
+        run: |
+          set -euo pipefail
+          URL="https://danmercede.info"
+          OUT="served.html"
+
+          # -sL: silent, follow redirects. --fail-with-body would hide the body
+          # on a 4xx/5xx; we want the body for diagnostics, so check size below.
+          curl -sL --max-time 30 "$URL" -o "$OUT"
+
+          if [ ! -s "$OUT" ]; then
+            echo "FAIL: fetched body from $URL is empty (no bytes returned)" >&2
+            exit 1
+          fi
+
+          # Count crawler-critical tags on the SERVED HTML — the DOM raw-HTML
+          # answer engines (GPTBot, ClaudeBot, PerplexityBot) receive without
+          # executing JS. Mirrors ci.yml's <h1 / <p grep idiom.
+          H1=$(grep -o '<h1[ >]' "$OUT" | wc -l | tr -d ' ')
+          P=$(grep -o '<p[ >]' "$OUT" | wc -l | tr -d ' ')
+          # JSON-LD: grep tolerant of attribute order/quoting/whitespace around
+          # type="application/ld+json".
+          LD=$(grep -oiE '<script[^>]*type[[:space:]]*=[[:space:]]*["'"'"']application/ld\+json["'"'"']' "$OUT" | wc -l | tr -d ' ')
+
+          echo "served $URL: <h1>=$H1 <p>=$P json-ld=$LD"
+
+          if [ "$H1" -lt 1 ]; then
+            echo "FAIL: served $URL is missing an <h1> (h1=$H1) — empty/JS-only crawler body" >&2
+            exit 1
+          fi
+          if [ "$P" -lt 1 ]; then
+            echo "FAIL: served $URL is missing a <p> (p=$P) — empty/JS-only crawler body" >&2
+            exit 1
+          fi
+          if [ "$LD" -lt 1 ]; then
+            echo "FAIL: served $URL is missing a <script type=\"application/ld+json\"> block (json-ld=$LD) — structured-data backlink lost in prod" >&2
+            exit 1
+          fi
+
+          echo "PASS: served crawler body intact (h1=$H1, p=$P, json-ld=$LD)"
