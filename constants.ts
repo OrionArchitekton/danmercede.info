@@ -2,25 +2,28 @@ import { IdentityProfile } from './types';
 
 // Static date ensures the checksum remains deterministic.
 // Update this manually when content changes.
-const LAST_UPDATED = "2026-06-15";
-const VERSION = "v2026.06.15";
+const LAST_UPDATED = "2026-06-30";
+const VERSION = "v2026.06.30";
 
 export const PROFILE_DATA: IdentityProfile = {
   fullName: "Dan Mercede",
   descriptor: "Founder & AI Systems Architect, Technology Executive",
-  location: "California, USA",
+  location: "San Diego, CA",
   lastUpdated: LAST_UPDATED,
   version: VERSION,
   summary: {
     primaryRole: "Founder & AI Systems Architect (Governed AI Operating Systems)",
     primaryOrg: "Orion Apex Capital",
     industry: "Applied Artificial Intelligence / FinTech",
-    yearsActive: "2015–Present"
+    yearsActive: "2015-Present"
   },
   links: [
     { label: "danmercede.com", url: "https://danmercede.com", primary: true },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/danmercede", primary: true },
+    { label: "X", url: "https://x.com/danmercede" },
     { label: "GitHub", url: "https://github.com/OrionArchitekton" },
+    { label: "dev.to", url: "https://dev.to/danmercede" },
+    { label: "Hashnode", url: "https://danmercede.hashnode.dev" },
     { label: "Orion Apex Capital", url: "https://orionapexcapital.com" },
     { label: "Cosmocrat", url: "https://cosmocrat.ai" }
   ],
@@ -32,15 +35,15 @@ export const PROFILE_DATA: IdentityProfile = {
       end: "Present"
     },
     {
-      role: "Director, Runtime Enforcement & AI Reliability",
+      role: "Director, Applied AI & Orchestration",
       company: "Orion Intelligence Agency",
       start: "2025",
       end: "Present"
     }
   ],
   platforms: [
-    { name: "Cosmocrat", description: "Governed AI Operating System — runtime enforcement, audit receipts, execution control plane" },
-    { name: "Orion Intelligence Agency", description: "Enterprise AI reliability engineering — runtime governance implementation" },
+    { name: "Cosmocrat", description: "Governed AI Operating System: runtime enforcement, audit receipts, execution control plane" },
+    { name: "Orion Intelligence Agency", description: "Enterprise AI reliability engineering for runtime governance implementation" },
     { name: "ReplyBy", description: "Communication automation product" },
     { name: "Apex Trading Systems", description: "Internal execution system" },
     { name: "Path of Life Hub", description: "Consumer signal platform" }
