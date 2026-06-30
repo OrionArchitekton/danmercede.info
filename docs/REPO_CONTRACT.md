@@ -74,8 +74,9 @@ git diff --check
 ```
 
 For implementation changes, follow `AGENTS.md`; this repo declares `npm run
-build`, `npm run dev`, and `npm run preview` but has no committed lockfile,
-test, lint, or CI workflow.
+build`, `npm test`, `npm run dev`, and `npm run preview` but has no committed
+lockfile or lint script. PRs also run the repository CI build-and-bake checks
+when GitHub Actions are enabled.
 
 ## Basis
 
