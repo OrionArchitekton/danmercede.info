@@ -24,6 +24,8 @@ export const PROFILE_DATA: IdentityProfile = {
     { label: "GitHub", url: "https://github.com/OrionArchitekton" },
     { label: "dev.to", url: "https://dev.to/danmercede" },
     { label: "Hashnode", url: "https://danmercede.hashnode.dev" },
+    { label: "YouTube", url: "https://www.youtube.com/@danmercede" },
+    { label: "Sessionize", url: "https://sessionize.com/dan-mercede/" },
     { label: "Orion Apex Capital", url: "https://orionapexcapital.com" },
     { label: "Cosmocrat", url: "https://cosmocrat.ai" }
   ],
