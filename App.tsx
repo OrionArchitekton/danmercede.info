@@ -130,7 +130,7 @@ const App: React.FC = () => {
                   <div className="text-neutral-600 text-sm print:text-neutral-700">{pos.company}</div>
                 </div>
                 <div className="font-mono text-xs text-neutral-500 mt-1 sm:mt-0 print:text-neutral-600">
-                  {pos.start} — {pos.end}
+                  {pos.start} - {pos.end}
                 </div>
               </div>
             ))}
@@ -158,7 +158,7 @@ const App: React.FC = () => {
               <div key={idx} className="pl-6 relative">
                 <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 bg-neutral-100 border border-neutral-300 rounded-full print:bg-white print:border-black"></div>
                 <div className="font-mono text-xs text-neutral-500 mb-0.5 print:text-neutral-600">
-                  {item.start} – {item.end}
+                  {item.start} - {item.end}
                 </div>
                 <div className="text-sm text-neutral-900 font-medium print:text-black">
                   {item.company}
@@ -204,10 +204,10 @@ const App: React.FC = () => {
               rel="noopener noreferrer"
               className="text-neutral-700 font-medium hover:text-black hover:underline underline-offset-4 transition-colors"
             >
-              Book a Runtime Governance Readiness Scan <span aria-hidden="true">&rarr;</span><span className="sr-only"> (opens in a new tab)</span>
+              Work with OIA on one workflow <span aria-hidden="true">&rarr;</span><span className="sr-only"> (opens in a new tab)</span>
             </a>
             <span className="text-neutral-500 text-[10px] tracking-wide">
-              Gap map &bull; Failure heatmap &bull; Enforcement checklist &bull; 30/60/90 plan
+              Strategy &bull; Leadership &bull; Engineering &bull; Agents
             </span>
           </div>
           <div className="flex flex-col sm:flex-row justify-between">
